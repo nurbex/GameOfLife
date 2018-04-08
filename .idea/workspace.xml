@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31990aa4-6db8-46c0-ab08-714649c3c3d8" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pckg0/GameObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pckg0/GameOfLife.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pckg0/GameOfLife.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pckg0/GameOfLife.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,13 +23,12 @@
       <file leaf-file-name="GameOfLife.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pckg0/GameOfLife.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="131" column="86" selection-start-line="131" selection-start-column="86" selection-end-line="131" selection-end-column="86" />
+            <state relative-caret-position="256">
+              <caret line="67" column="61" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#createContent#0;class#GameOfLife#0" />
-                <element signature="e#1517#2835#0" expanded="true" />
-                <element signature="e#2834#2835#0" expanded="true" />
+                <element signature="e#1634#3894#0" expanded="true" />
+                <element signature="e#3893#3894#0" expanded="true" />
                 <element signature="method#addFood#0;class#GameOfLife#0" />
                 <element signature="method#addCellLife#0;class#GameOfLife#0" />
                 <element signature="method#addGameObject#0;class#GameOfLife#0" />
@@ -39,8 +36,8 @@
                 <element signature="class#CellLife#0;class#GameOfLife#0" />
                 <element signature="method#CellLife#0;class#CellLife#0;class#GameOfLife#0" />
                 <element signature="method#start#0;class#GameOfLife#0" />
-                <element signature="e#7083#7084#0" expanded="true" />
-                <element signature="e#7107#7108#0" expanded="true" />
+                <element signature="e#8026#8027#0" expanded="true" />
+                <element signature="e#8050#8051#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -49,15 +46,13 @@
       <file leaf-file-name="GameObject.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pckg0/GameObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="93">
-              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+            <state relative-caret-position="432">
+              <caret line="64" column="9" lean-forward="true" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
               <folding>
                 <element signature="e#323#324#0" expanded="true" />
                 <element signature="e#350#351#0" expanded="true" />
                 <element signature="e#1026#1027#0" expanded="true" />
                 <element signature="e#1060#1061#0" expanded="true" />
-                <element signature="e#1299#1300#0" expanded="true" />
-                <element signature="e#1318#1319#0" expanded="true" />
                 <element signature="method#look#0;class#GameObject#0" />
                 <element signature="method#isColliding#0;class#GameObject#0" />
               </folding>
@@ -205,6 +200,21 @@
       <option name="presentableId" value="Default" />
       <updated>1523068333549</updated>
     </task>
+    <task id="LOCAL-00001" summary="Genetic algorithm added.">
+      <created>1523164799882</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1523164799882</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Genetic algorithm approved">
+      <created>1523168668285</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1523168668285</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -226,7 +236,7 @@
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.30183357" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2538787" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32863188" />
       <window_info anchor="right" id="Coverage" side_tool="true" weight="0.32997987" />
       <window_info anchor="bottom" id="Terminal" order="7" />
@@ -249,6 +259,11 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Genetic algorithm added." />
+    <MESSAGE value="Genetic algorithm approved" />
+    <option name="LAST_COMMIT_MESSAGE" value="Genetic algorithm approved" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <option name="time" value="7" />
@@ -261,9 +276,8 @@
           <caret line="122" selection-start-line="122" selection-end-line="122" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#createContent#0;class#GameOfLife#0" />
-            <element signature="e#1517#2835#0" expanded="true" />
-            <element signature="e#2834#2835#0" expanded="true" />
+            <element signature="e#1634#3894#0" expanded="true" />
+            <element signature="e#3893#3894#0" expanded="true" />
             <element signature="method#addFood#0;class#GameOfLife#0" />
             <element signature="method#addCellLife#0;class#GameOfLife#0" />
             <element signature="method#addGameObject#0;class#GameOfLife#0" />
@@ -271,8 +285,8 @@
             <element signature="class#CellLife#0;class#GameOfLife#0" />
             <element signature="method#CellLife#0;class#CellLife#0;class#GameOfLife#0" />
             <element signature="method#start#0;class#GameOfLife#0" />
-            <element signature="e#7083#7084#0" expanded="true" />
-            <element signature="e#7107#7108#0" expanded="true" />
+            <element signature="e#8026#8027#0" expanded="true" />
+            <element signature="e#8050#8051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -286,8 +300,6 @@
             <element signature="e#350#351#0" expanded="true" />
             <element signature="e#1026#1027#0" expanded="true" />
             <element signature="e#1060#1061#0" expanded="true" />
-            <element signature="e#1299#1300#0" expanded="true" />
-            <element signature="e#1318#1319#0" expanded="true" />
             <element signature="method#look#0;class#GameObject#0" />
             <element signature="method#isColliding#0;class#GameObject#0" />
           </folding>
@@ -300,9 +312,8 @@
           <caret line="139" column="34" selection-start-line="139" selection-start-column="34" selection-end-line="139" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#createContent#0;class#GameOfLife#0" />
-            <element signature="e#1517#2835#0" expanded="true" />
-            <element signature="e#2834#2835#0" expanded="true" />
+            <element signature="e#1634#3894#0" expanded="true" />
+            <element signature="e#3893#3894#0" expanded="true" />
             <element signature="method#addFood#0;class#GameOfLife#0" />
             <element signature="method#addCellLife#0;class#GameOfLife#0" />
             <element signature="method#addGameObject#0;class#GameOfLife#0" />
@@ -310,8 +321,8 @@
             <element signature="class#CellLife#0;class#GameOfLife#0" />
             <element signature="method#CellLife#0;class#CellLife#0;class#GameOfLife#0" />
             <element signature="method#start#0;class#GameOfLife#0" />
-            <element signature="e#7083#7084#0" expanded="true" />
-            <element signature="e#7107#7108#0" expanded="true" />
+            <element signature="e#8026#8027#0" expanded="true" />
+            <element signature="e#8050#8051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -325,8 +336,6 @@
             <element signature="e#350#351#0" expanded="true" />
             <element signature="e#1026#1027#0" expanded="true" />
             <element signature="e#1060#1061#0" expanded="true" />
-            <element signature="e#1299#1300#0" expanded="true" />
-            <element signature="e#1318#1319#0" expanded="true" />
             <element signature="method#look#0;class#GameObject#0" />
             <element signature="method#isColliding#0;class#GameObject#0" />
           </folding>
@@ -339,9 +348,8 @@
           <caret line="42" column="85" lean-forward="true" selection-start-line="42" selection-start-column="85" selection-end-line="42" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#createContent#0;class#GameOfLife#0" />
-            <element signature="e#1517#2835#0" expanded="true" />
-            <element signature="e#2834#2835#0" expanded="true" />
+            <element signature="e#1634#3894#0" expanded="true" />
+            <element signature="e#3893#3894#0" expanded="true" />
             <element signature="method#addFood#0;class#GameOfLife#0" />
             <element signature="method#addCellLife#0;class#GameOfLife#0" />
             <element signature="method#addGameObject#0;class#GameOfLife#0" />
@@ -349,8 +357,8 @@
             <element signature="class#CellLife#0;class#GameOfLife#0" />
             <element signature="method#CellLife#0;class#CellLife#0;class#GameOfLife#0" />
             <element signature="method#start#0;class#GameOfLife#0" />
-            <element signature="e#7083#7084#0" expanded="true" />
-            <element signature="e#7107#7108#0" expanded="true" />
+            <element signature="e#8026#8027#0" expanded="true" />
+            <element signature="e#8050#8051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -364,8 +372,6 @@
             <element signature="e#350#351#0" expanded="true" />
             <element signature="e#1026#1027#0" expanded="true" />
             <element signature="e#1060#1061#0" expanded="true" />
-            <element signature="e#1299#1300#0" expanded="true" />
-            <element signature="e#1318#1319#0" expanded="true" />
             <element signature="method#look#0;class#GameObject#0" />
             <element signature="method#isColliding#0;class#GameObject#0" />
           </folding>
@@ -378,9 +384,8 @@
           <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#createContent#0;class#GameOfLife#0" />
-            <element signature="e#1517#2835#0" expanded="true" />
-            <element signature="e#2834#2835#0" expanded="true" />
+            <element signature="e#1634#3894#0" expanded="true" />
+            <element signature="e#3893#3894#0" expanded="true" />
             <element signature="method#addFood#0;class#GameOfLife#0" />
             <element signature="method#addCellLife#0;class#GameOfLife#0" />
             <element signature="method#addGameObject#0;class#GameOfLife#0" />
@@ -388,8 +393,8 @@
             <element signature="class#CellLife#0;class#GameOfLife#0" />
             <element signature="method#CellLife#0;class#CellLife#0;class#GameOfLife#0" />
             <element signature="method#start#0;class#GameOfLife#0" />
-            <element signature="e#7083#7084#0" expanded="true" />
-            <element signature="e#7107#7108#0" expanded="true" />
+            <element signature="e#8026#8027#0" expanded="true" />
+            <element signature="e#8050#8051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -403,8 +408,6 @@
             <element signature="e#350#351#0" expanded="true" />
             <element signature="e#1026#1027#0" expanded="true" />
             <element signature="e#1060#1061#0" expanded="true" />
-            <element signature="e#1299#1300#0" expanded="true" />
-            <element signature="e#1318#1319#0" expanded="true" />
             <element signature="method#look#0;class#GameObject#0" />
             <element signature="method#isColliding#0;class#GameObject#0" />
           </folding>
@@ -553,15 +556,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pckg0/GameObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        <state relative-caret-position="432">
+          <caret line="64" column="9" lean-forward="true" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
           <folding>
             <element signature="e#323#324#0" expanded="true" />
             <element signature="e#350#351#0" expanded="true" />
             <element signature="e#1026#1027#0" expanded="true" />
             <element signature="e#1060#1061#0" expanded="true" />
-            <element signature="e#1299#1300#0" expanded="true" />
-            <element signature="e#1318#1319#0" expanded="true" />
             <element signature="method#look#0;class#GameObject#0" />
             <element signature="method#isColliding#0;class#GameObject#0" />
           </folding>
@@ -570,13 +571,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pckg0/GameOfLife.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="131" column="86" selection-start-line="131" selection-start-column="86" selection-end-line="131" selection-end-column="86" />
+        <state relative-caret-position="256">
+          <caret line="67" column="61" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#createContent#0;class#GameOfLife#0" />
-            <element signature="e#1517#2835#0" expanded="true" />
-            <element signature="e#2834#2835#0" expanded="true" />
+            <element signature="e#1634#3894#0" expanded="true" />
+            <element signature="e#3893#3894#0" expanded="true" />
             <element signature="method#addFood#0;class#GameOfLife#0" />
             <element signature="method#addCellLife#0;class#GameOfLife#0" />
             <element signature="method#addGameObject#0;class#GameOfLife#0" />
@@ -584,8 +584,8 @@
             <element signature="class#CellLife#0;class#GameOfLife#0" />
             <element signature="method#CellLife#0;class#CellLife#0;class#GameOfLife#0" />
             <element signature="method#start#0;class#GameOfLife#0" />
-            <element signature="e#7083#7084#0" expanded="true" />
-            <element signature="e#7107#7108#0" expanded="true" />
+            <element signature="e#8026#8027#0" expanded="true" />
+            <element signature="e#8050#8051#0" expanded="true" />
           </folding>
         </state>
       </provider>
