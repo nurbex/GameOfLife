@@ -60,7 +60,9 @@ public class GameObject {
         return cellLifeCommand;
     }
     public void setCellLifeCommand(int[] cellLifeCommand){
-        this.cellLifeCommand=cellLifeCommand;
+        for(int i=0;i<cellLifeCommand.length;i++){
+            this.cellLifeCommand[i]=cellLifeCommand[i];
+        }
     }
 
 

@@ -20,7 +20,8 @@ public class GameOfLife extends Application {
     private int skipTime=2;
     private int skipTimeCounter=0;
     private int generation=0;
-    private int cellLifeTime=100;
+    private int maxGeneration=50;
+    private int cellLifeTime=1000;
     private int cellPopulation=20;
 
     private Pane root;
@@ -62,21 +63,37 @@ public class GameOfLife extends Application {
                 if(cellLife.size()<=4){
                     System.out.println(generation);
                     generation++;
-                    /*while(cellLife.size()<=20){
-                        for(int i=0;i<cellLife.size();i++){
-                            int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 20) * 20;
-                            int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 20) * 20;
-                            addCellLife(cellLife.get(i), x, y);
+                    if(cellLife.size()!=0){
+                        System.out.println("******************************************** generation: "+generation+" cell population survived: "+cellLife.size()+ " **********************************************");
+                        int k=cellLife.size();
+                        while(cellLife.size()<=10){
+                            for(int i=0;i<k;i++){
+                                int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 20) * 20;
+                                int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 20) * 20;
+                                addCellLife(new CellLife(), x, y);
+                                for(int j=0;j<64;j++) {
+                                    cellLife.get(i + k).getCellLifeCommand()[j] = cellLife.get(i).getCellLifeCommand()[j];
+                                }
+                            }
                         }
-                    }*/
+                    }
+
                     while(cellLife.size()!=cellPopulation){
                         int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 20) * 20;
                         int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 20) * 20;
                         addCellLife(new CellLife(), x, y);
                     }
+
+                    for(int i=0;i<cellLife.size();i++){
+                        cellLife.get(i).setLifeTime(90);
+                        for(int j=0;j<64;j++){
+                            System.out.print(" "+cellLife.get(i).getCellLifeCommand()[j]);
+                        }
+                        System.out.println(" ");
+                    }
                 }
 
-                if(generation==100) {
+                if(generation==maxGeneration) {
                     stop();
                 }
 
@@ -95,9 +112,7 @@ public class GameOfLife extends Application {
         int[] cellCommand=new int[64];
         for(int i=0;i<64;i++){
             cellCommand[i]=((int)(Math.random()*63))%63;
-            System.out.print(cellCommand[i]+" ");
         }
-        System.out.println(" ");
         cell.setCellLifeCommand(cellCommand);
         cellLife.add(cell);
         addGameObject(cell,x,y);
@@ -134,7 +149,7 @@ public class GameOfLife extends Application {
 
 
 
-        if(Math.random()<1.1){
+        if(Math.random()<0.1){
             int x=((int)(Math.random()*gameArea.getPrefWidth())/20)*20;
             int y=((int)(Math.random()*gameArea.getPrefHeight())/20)*20;
             addFood(new Food(), x,y);
@@ -155,7 +170,7 @@ public class GameOfLife extends Application {
                 cellLife.get(i).setAlive(false);
                 gameArea.getChildren().removeAll(cellLife.get(i).getView());
             }
-            System.out.println("generation: "+generation+" lifetime of"+i+" cell: "+cellLife.get(i).getLifeTime());
+            //System.out.println("generation: "+generation+" lifetime of"+i+" cell: "+cellLife.get(i).getLifeTime());
         }
 
         foods.removeIf(GameObject::isDead);
