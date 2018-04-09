@@ -7,6 +7,9 @@ public class GameObject {
     private boolean isAlive=true;
 
     private int lifeTime=90;
+    private int generation;
+    private String cellName="N";
+    private String cellMutation="M/0";
 
     private int commandIndex=0;
     private int[] cellLifeCommand=new int[64];
@@ -33,6 +36,27 @@ public class GameObject {
     }
     public void setLifeTime(int lifeTime){
         this.lifeTime=lifeTime;
+    }
+
+    public int getGeneration(){
+        return generation;
+    }
+    public void setGeneration(int generation){
+        this.generation=generation;
+    }
+
+    public String getCellName(){
+        return cellName;
+    }
+    public void setCellName(String n){
+        this.cellName=this.cellName+n;
+    }
+
+    public String getCellMutation(){
+        return cellMutation;
+    }
+    public void setCellMutation(String n){
+        this.cellMutation=this.cellMutation+"/"+n;
     }
 
     public void setDirectionX(int x){

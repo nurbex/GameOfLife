@@ -4,6 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -24,7 +25,7 @@ public class GameOfLife extends Application {
     private int cellPopulation=40;
     private double foodChance=1.5;
     private double foodChanceCycle =foodChance;
-    private int foodTimes=5;
+    private int foodTimes=10;
     private int foodCycle=foodTimes;
 
     private Pane root;
@@ -49,6 +50,8 @@ public class GameOfLife extends Application {
                 int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 10) * 10;
                 int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 10) * 10;
                 addCellLife(new CellLife(), x, y);
+                cellLife.get(cellLife.size()-1).setGeneration(generation);
+                cellLife.get(cellLife.size()-1).setCellName(""+generation+"/"+cellLife.indexOf(cellLife.get(cellLife.size()-1)));
         }
         System.out.println(cellLife.size());
 
@@ -87,6 +90,17 @@ public class GameOfLife extends Application {
                     if(cellLife.size()!=0){
                         System.out.println("********* generation: "+generation+" cell population survived: "+cellLife.size()+ " **********");
 
+                        for(int i=0;i<cellLife.size();i++){
+                            System.out.print("survived cell generatin: "+cellLife.get(i).getGeneration()+". CellName: "+cellLife.get(i).getCellName()+". CellMutation: "+cellLife.get(i).getCellMutation()+ ". Cell Command Genes: ");
+
+                            /*for(int k=0;k<64;k++){
+                                System.out.print(cellLife.get(i).getCellLifeCommand()[k]+" ");
+                            }*/
+                            System.out.println();
+
+
+                        }
+
                         //creating copies of survived cells
                         int k=cellLife.size();
                         while(cellLife.size()<=32){
@@ -97,11 +111,15 @@ public class GameOfLife extends Application {
                                 for(int j=0;j<64;j++) {
                                     cellLife.get(i + k).getCellLifeCommand()[j] = cellLife.get(i).getCellLifeCommand()[j];
                                 }
+                                cellLife.get(cellLife.size()-1).setCellName("/"+cellLife.indexOf(cellLife.get(cellLife.size()-1)));
+
                             }
                         }
                         // nearly one third of survived cells mutated in one command(gene)
                         for(int i=20;i<cellLife.size();i++){
-                            cellLife.get(i).getCellLifeCommand()[(int)((Math.random())%63)]=(int)((Math.random())%63);
+                            cellLife.get(i).getCellLifeCommand()[(int)((Math.random())*63)]=(int)((Math.random())*63);
+                            //System.out.println(" index "+((int)((Math.random())*63))+"/ mutation: "+(int)((Math.random())*63));
+                            cellLife.get(i).setCellMutation(""+generation);
                         }
                     }
 
@@ -110,6 +128,9 @@ public class GameOfLife extends Application {
                         int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 10) * 10;
                         int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 10) * 10;
                         addCellLife(new CellLife(), x, y);
+                        cellLife.get(cellLife.size()-1).getView().setBlendMode(BlendMode.COLOR_BURN);
+                        cellLife.get(cellLife.size()-1).setGeneration(generation);
+                        cellLife.get(cellLife.size()-1).setCellName(""+generation+"/"+cellLife.indexOf(cellLife.get(cellLife.size()-1)));
                     }
 
                 }
@@ -125,6 +146,7 @@ public class GameOfLife extends Application {
         root.getChildren().addAll(gameArea); //uiArea,
         return root;
     }
+
     private void addFood(GameObject food,double x,double y){
         foods.add(food);
         addGameObject(food,x,y);
@@ -262,7 +284,6 @@ public class GameOfLife extends Application {
         //decrementing food chance with each cycle
         foodChanceCycle = foodChanceCycle -0.01;
     }
-
 
     private class Food extends GameObject{
         Food(){
