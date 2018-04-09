@@ -11,7 +11,7 @@ public class GameObject {
     private int commandIndex=0;
     private int[] cellLifeCommand=new int[64];
 
-    private int velocity=20;
+    private int velocity=10;
     private int directionX;
     private int directionY;
 
@@ -161,17 +161,17 @@ public class GameObject {
         view.setTranslateY(view.getTranslateY() + directionY*velocity);
 
         if((view.getTranslateX() + directionX*velocity)>screenX){
-            view.setTranslateX(-20 + directionX*velocity);
+            view.setTranslateX(-10 + directionX*velocity);
         }
-        else if(((view.getTranslateX() + directionX*velocity)<-20)){
+        else if(((view.getTranslateX() + directionX*velocity)<-10)){
             view.setTranslateX(screenX + directionX*velocity);
         }
 
 
         if((view.getTranslateY() + directionY*velocity)>screenY){
-            view.setTranslateY(-20 + directionY*velocity);
+            view.setTranslateY(-10 + directionY*velocity);
         }
-        else if(((view.getTranslateY() + directionY*velocity)<-20)){
+        else if(((view.getTranslateY() + directionY*velocity)<-10)){
             view.setTranslateY(screenY + directionY*velocity);
         }
     }

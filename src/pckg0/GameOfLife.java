@@ -4,7 +4,6 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -14,21 +13,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameOfLife extends Application {
-    private int screenSizeX=700;
+    private int screenSizeX=600;
     private int screenSizeY=screenSizeX;
 
-    private int skipTime=2;
+    private int skipTime=1;
     private int skipTimeCounter=0;
     private int generation=0;
-    private int maxGeneration=50;
-    private int cellLifeTime=1000;
+    private int maxGeneration=50000;
+    private int cellLifeTime=180;
     private int cellPopulation=40;
-    private double foodChance=1.0;
+    private double foodChance=1.5;
+    private double foodChanceCycle =foodChance;
+    private int foodTimes=5;
+    private int foodCycle=foodTimes;
 
     private Pane root;
     private Pane gameArea;
 
     private List<GameObject> foods=new ArrayList<>();
+    private List<GameObject> poisons=new ArrayList<>();
     private List<GameObject> cellLife =new ArrayList<>();
 
     private Parent createContent() {
@@ -39,12 +42,12 @@ public class GameOfLife extends Application {
 
         gameArea = new Pane();
         gameArea.setPrefSize(screenSizeX, screenSizeY);
-        gameArea.setStyle("-fx-background-color: whitesmoke"); //-fx-border-color:lightgray;
+        gameArea.setStyle("-fx-background-color: whitesmoke"); //-fx-border-color:lightgray; default "-fx-background-color: whitesmoke";
 
         // Adding default cellLife.
         while(cellLife.size()<cellPopulation) {
-                int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 20) * 20;
-                int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 20) * 20;
+                int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 10) * 10;
+                int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 10) * 10;
                 addCellLife(new CellLife(), x, y);
         }
         System.out.println(cellLife.size());
@@ -62,41 +65,53 @@ public class GameOfLife extends Application {
                 skipTimeCounter++;
 
                 if(cellLife.size()<=8){
-                    foodChance=1.0;
+                    foodCycle=foodTimes;
+                    foodChanceCycle =foodChance;
+
+                    //removing old food
                     for(GameObject food:foods){
                         food.setAlive(false);
                         gameArea.getChildren().removeAll(food.getView());
                     }
                     foods.removeIf(GameObject::isDead);
+
+                    //removing old poison
+                    for(GameObject poison:poisons){
+                        poison.setAlive(false);
+                        gameArea.getChildren().removeAll(poison.getView());
+                    }
+                    poisons.removeIf(GameObject::isDead);
+
+
                     generation++;
                     if(cellLife.size()!=0){
                         System.out.println("********* generation: "+generation+" cell population survived: "+cellLife.size()+ " **********");
+
+                        //creating copies of survived cells
                         int k=cellLife.size();
-                        while(cellLife.size()<=30){
+                        while(cellLife.size()<=32){
                             for(int i=0;i<k;i++){
-                                int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 20) * 20;
-                                int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 20) * 20;
+                                int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 10) * 10;
+                                int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 10) * 10;
                                 addCellLife(new CellLife(), x, y);
                                 for(int j=0;j<64;j++) {
                                     cellLife.get(i + k).getCellLifeCommand()[j] = cellLife.get(i).getCellLifeCommand()[j];
                                 }
                             }
                         }
+                        // nearly one third of survived cells mutated in one command(gene)
+                        for(int i=20;i<cellLife.size();i++){
+                            cellLife.get(i).getCellLifeCommand()[(int)((Math.random())%63)]=(int)((Math.random())%63);
+                        }
                     }
 
+                    //creating random population of cells
                     while(cellLife.size()!=cellPopulation){
-                        int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 20) * 20;
-                        int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 20) * 20;
+                        int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 10) * 10;
+                        int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 10) * 10;
                         addCellLife(new CellLife(), x, y);
                     }
 
-                    /*for(int i=0;i<cellLife.size();i++){
-                        cellLife.get(i).setLifeTime(90);
-                        for(int j=0;j<64;j++){
-                            System.out.print(" "+cellLife.get(i).getCellLifeCommand()[j]);
-                        }
-                        System.out.println(" ");
-                    }*/
                 }
 
                 if(generation==maxGeneration) {
@@ -113,6 +128,10 @@ public class GameOfLife extends Application {
     private void addFood(GameObject food,double x,double y){
         foods.add(food);
         addGameObject(food,x,y);
+    }
+    private void addPoison(GameObject poison,double x,double y){
+        poisons.add(poison);
+        addGameObject(poison,x,y);
     }
     private void addCellLife(GameObject cell, double x, double y){
         int[] cellCommand=new int[64];
@@ -131,35 +150,90 @@ public class GameOfLife extends Application {
 
     private void onUpdate(){
 
+        //cell behavior according to command in genes
         for(int i=0;i<cellLife.size();i++){
             int commandIndex=cellLife.get(i).getCommandIndex();
             int command=cellLife.get(i).getCellLifeCommand()[commandIndex];
             if((command>=0)&&(command<8)){
                 cellLife.get(i).look(command);
+
+                //looking to direction, eating food if there is
                 for(int k=0;k<foods.size();k++){
-                    if((cellLife.get(i).getView().getTranslateX()+cellLife.get(i).getDirectionX()*20==foods.get(k).getView().getTranslateX())&&(cellLife.get(i).getView().getTranslateY()+cellLife.get(i).getDirectionY()*20==foods.get(k).getView().getTranslateY())) {
+                    if((cellLife.get(i).getView().getTranslateX()+cellLife.get(i).getDirectionX()*10==foods.get(k).getView().getTranslateX())&&(cellLife.get(i).getView().getTranslateY()+cellLife.get(i).getDirectionY()*10==foods.get(k).getView().getTranslateY())) {
                         foods.get(k).isDead();
                         gameArea.getChildren().removeAll(foods.get(k).getView());
                         if(cellLife.get(i).getLifeTime()<cellLifeTime){
-                        cellLife.get(i).setLifeTime(cellLife.get(i).getLifeTime()+10);
+                        cellLife.get(i).setLifeTime(cellLife.get(i).getLifeTime()+5);
                         }
+                    }
+                }
+                //looking to direction, if there is poison converting it to food but not eating, if it looks second time it will eat it, or maybe i will change it later
+                for(int k=0;k<poisons.size();k++){
+                    if((cellLife.get(i).getView().getTranslateX()+cellLife.get(i).getDirectionX()*10==poisons.get(k).getView().getTranslateX())&&(cellLife.get(i).getView().getTranslateY()+cellLife.get(i).getDirectionY()*10==poisons.get(k).getView().getTranslateY())) {
+                        poisons.get(k).setAlive(false);
+                        addFood(new Food(), poisons.get(k).getView().getTranslateX(),poisons.get(k).getView().getTranslateY());
+                        gameArea.getChildren().removeAll(poisons.get(k).getView());
                     }
                 }
             }else if(command<16){
                 cellLife.get(i).makeStep(command,screenSizeX,screenSizeY);
+                //cell dies if it steps ont poison
+                for(int j=0;j<poisons.size();j++){
+                    if((cellLife.get(i).getView().getTranslateX()+cellLife.get(i).getDirectionX()*10==poisons.get(j).getView().getTranslateX())&&(cellLife.get(i).getView().getTranslateY()+cellLife.get(i).getDirectionY()*10==poisons.get(j).getView().getTranslateY())) {
+                        poisons.get(j).setAlive(false);
+                        cellLife.get(i).setAlive(false);
+                        gameArea.getChildren().removeAll(poisons.get(j).getView(),cellLife.get(i).getView());
+                    }
+                }
             }else if(command<64){
                 cellLife.get(i).setCommandIndex((cellLife.get(i).getCommandIndex()+command)%63);
             }
             cellLife.get(i).setCommandIndex((cellLife.get(i).getCommandIndex()+1)%63);
         }
 
-
-
-        if(Math.random()<foodChance){
-            int x=((int)(Math.random()*gameArea.getPrefWidth())/20)*20;
-            int y=((int)(Math.random()*gameArea.getPrefHeight())/20)*20;
-            addFood(new Food(), x,y);
+        //adding amount of food and poison at the begining
+        for(int i=0; i<foodCycle;foodCycle--){
+            //adding food
+            if(Math.random()< foodChanceCycle){
+                int x=((int)(Math.random()*gameArea.getPrefWidth())/10)*10;
+                int y=((int)(Math.random()*gameArea.getPrefHeight())/10)*10;
+                addFood(new Food(), x,y);
+            }
+            //adding poison
+            if(Math.random()< foodChanceCycle){
+                int x=((int)(Math.random()*gameArea.getPrefWidth())/10)*10;
+                int y=((int)(Math.random()*gameArea.getPrefHeight())/10)*10;
+                addPoison(new Poison(), x,y);
+                for(int k = 0; k< cellLife.size(); k++) {
+                    if(!((cellLife.get(k).getView().getTranslateX()==x)&&(cellLife.get(k).getView().getTranslateY()==y))){
+                        addPoison(new Poison(), x,y);
+                    }
+                }
+            }
         }
+        //adding food each cycle
+        if(Math.random()< foodChanceCycle){
+            int x=((int)(Math.random()*gameArea.getPrefWidth())/10)*10;
+            int y=((int)(Math.random()*gameArea.getPrefHeight())/10)*10;
+            //not creating food on cell
+            for(int k = 0; k< cellLife.size(); k++) {
+                if(!((cellLife.get(k).getView().getTranslateX()==x)&&(cellLife.get(k).getView().getTranslateY()==y))){
+                    addFood(new Food(), x,y);
+                }
+            }
+        }
+        //adding poison each cycle
+        if(Math.random()< foodChanceCycle){
+            int x=((int)(Math.random()*gameArea.getPrefWidth())/10)*10;
+            int y=((int)(Math.random()*gameArea.getPrefHeight())/10)*10;
+            //not killing cell from the begining
+            for(int k = 0; k< cellLife.size(); k++) {
+                if(!((cellLife.get(k).getView().getTranslateX()==x)&&(cellLife.get(k).getView().getTranslateY()==y))){
+                    addPoison(new Poison(), x,y);
+                }
+            }
+        }
+
 
         // no food and cell in one place
         for(int k = 0; k< cellLife.size(); k++) {
@@ -170,6 +244,8 @@ public class GameOfLife extends Application {
                 }
             }
         }
+
+        //decrementing lifeTime of cell each cycle and removing dead cells from scene
         for(int i=0; i<cellLife.size();i++){
             cellLife.get(i).setLifeTime(cellLife.get(i).getLifeTime()-1);
             if(cellLife.get(i).getLifeTime()==0){
@@ -179,36 +255,46 @@ public class GameOfLife extends Application {
             //System.out.println("generation: "+generation+" lifetime of"+i+" cell: "+cellLife.get(i).getLifeTime());
         }
 
+        //removing dead objects from List
         foods.removeIf(GameObject::isDead);
         cellLife.removeIf(GameObject::isDead);
-        foodChance=foodChance-0.01;
+
+        //decrementing food chance with each cycle
+        foodChanceCycle = foodChanceCycle -0.01;
     }
 
 
     private class Food extends GameObject{
         Food(){
-            super(new Rectangle(18,18,Color.LIGHTGREEN));
+            super(new Rectangle(8,8,Color.LIGHTGREEN));
             super.getView().setLayoutX(2);
             super.getView().setLayoutY(2);
             super.getView().setStyle("-fx-stroke: green");
         }
     }
+    private class Poison extends GameObject{
+        Poison(){
+            super(new Rectangle(8,8,Color.CORAL));
+            super.getView().setLayoutX(2);
+            super.getView().setLayoutY(2);
+            super.getView().setStyle("-fx-stroke: crimson");
+        }
+    }
     private class CellLife extends GameObject{
         CellLife(){
-            super(new Rectangle(18,18,Color.DEEPSKYBLUE));
+            super(new Rectangle(8,8,Color.DEEPSKYBLUE));
             super.getView().setLayoutX(2);
             super.getView().setLayoutY(2);
             super.getView().setStyle("-fx-stroke: blue");
         }
-
     }
 
 
     @Override
     public void start(Stage stage){
         stage.setScene(new Scene(createContent()));
-        stage.setMaxWidth(screenSizeX);
-        stage.setMaxHeight(screenSizeY);
+        //stage.setMaxWidth(screenSizeX);
+        //stage.setMaxHeight(screenSizeY);
         stage.setTitle("CellLife Game!");
         stage.show();
     }
