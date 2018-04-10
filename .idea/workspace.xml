@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="31990aa4-6db8-46c0-ab08-714649c3c3d8" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pckg0/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pckg0/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pckg0/GameOfLife.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pckg0/GameOfLife.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,8 +22,8 @@
       <file leaf-file-name="GameOfLife.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pckg0/GameOfLife.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="57" column="150" selection-start-line="57" selection-start-column="150" selection-end-line="57" selection-end-column="150" />
+            <state relative-caret-position="109">
+              <caret line="61" column="13" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#addFood#0;class#GameOfLife#0" />
@@ -235,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523296295075</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Genetic algorithm approved.">
+      <created>1523330706196</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1523330706196</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -249,7 +254,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32863188" />
@@ -257,7 +261,7 @@
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22425953" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.43723553" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32863188" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32863188" />
       <window_info id="Designer" order="2" />
@@ -284,7 +288,8 @@
     <MESSAGE value="Genetic algorithm added." />
     <MESSAGE value="Genetic algorithm approved" />
     <MESSAGE value="Genetic algorithm approved. Poison GameObject added." />
-    <option name="LAST_COMMIT_MESSAGE" value="Genetic algorithm approved. Poison GameObject added." />
+    <MESSAGE value="Genetic algorithm approved." />
+    <option name="LAST_COMMIT_MESSAGE" value="Genetic algorithm approved." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -666,8 +671,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pckg0/GameOfLife.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="57" column="150" selection-start-line="57" selection-start-column="150" selection-end-line="57" selection-end-column="150" />
+        <state relative-caret-position="109">
+          <caret line="61" column="13" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#addFood#0;class#GameOfLife#0" />
