@@ -9,7 +9,7 @@ public class GameObject {
     private int lifeTime=90;
     private int generation;
     private String cellName="N";
-    private String cellMutation="M/0";
+    private String cellMutation="M";
 
     private int commandIndex=0;
     private int[] cellLifeCommand=new int[64];
@@ -56,7 +56,7 @@ public class GameObject {
         return cellMutation;
     }
     public void setCellMutation(String n){
-        this.cellMutation=this.cellMutation+"/"+n;
+        this.cellMutation=n;
     }
 
     public void setDirectionX(int x){

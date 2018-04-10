@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameOfLife extends Application {
-    private int screenSizeX=600;
+    private int screenSizeX=300;
     private int screenSizeY=screenSizeX;
 
     private int skipTime=1;
@@ -23,7 +23,8 @@ public class GameOfLife extends Application {
     private int maxGeneration=50000;
     private int cellLifeTime=180;
     private int cellPopulation=40;
-    private double foodChance=1.5;
+    private int commandRange=15; //default 63
+    private double foodChance=2.5;
     private double foodChanceCycle =foodChance;
     private int foodTimes=10;
     private int foodCycle=foodTimes;
@@ -53,7 +54,13 @@ public class GameOfLife extends Application {
                 cellLife.get(cellLife.size()-1).setGeneration(generation);
                 cellLife.get(cellLife.size()-1).setCellName(""+generation+"/"+cellLife.indexOf(cellLife.get(cellLife.size()-1)));
         }
-        System.out.println(cellLife.size());
+        cellLife.get(0).setCellName("Nurbek");
+        int[] nurbeksCommands={0,1,2,3,4,5,6,7,2,2,10,2,2,10,0,1,2,3,4,5,6,7,2,2,10,2,2,10,0,1,2,3,4,5,6,7,2,2,10,2,2,10,0,1,2,3,4,5,6,6,2,2,10,2,2,10,4,4,12,4,4,12,2,2};
+        cellLife.get(0).setCellLifeCommand(nurbeksCommands);
+        //System.out.println(cellLife.get(0).getCellName());
+        for(int i=0;i<64;i++){
+           // System.out.print(cellLife.get(0).getCellLifeCommand()[i]+" ");
+        }
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -88,17 +95,16 @@ public class GameOfLife extends Application {
 
                     generation++;
                     if(cellLife.size()!=0){
+                        System.out.println();
                         System.out.println("********* generation: "+generation+" cell population survived: "+cellLife.size()+ " **********");
 
                         for(int i=0;i<cellLife.size();i++){
-                            System.out.print("survived cell generatin: "+cellLife.get(i).getGeneration()+". CellName: "+cellLife.get(i).getCellName()+". CellMutation: "+cellLife.get(i).getCellMutation()+ ". Cell Command Genes: ");
+                            System.out.print("Survived cell generatin: "+cellLife.get(i).getGeneration()+". CellName: "+cellLife.get(i).getCellName()+". CellMutation: "+cellLife.get(i).getCellMutation()+ ". Cell Command Genes: ");
 
-                            /*for(int k=0;k<64;k++){
+                            for(int k=0;k<64;k++){
                                 System.out.print(cellLife.get(i).getCellLifeCommand()[k]+" ");
-                            }*/
+                            }
                             System.out.println();
-
-
                         }
 
                         //creating copies of survived cells
@@ -111,15 +117,17 @@ public class GameOfLife extends Application {
                                 for(int j=0;j<64;j++) {
                                     cellLife.get(i + k).getCellLifeCommand()[j] = cellLife.get(i).getCellLifeCommand()[j];
                                 }
-                                cellLife.get(cellLife.size()-1).setCellName("/"+cellLife.indexOf(cellLife.get(cellLife.size()-1)));
+                                cellLife.get(cellLife.size()-1).setCellMutation(cellLife.get(i).getCellMutation());
+                                cellLife.get(cellLife.size()-1).setGeneration(cellLife.get(i).getGeneration());
+                                cellLife.get(cellLife.size()-1).setCellName("/"+i);
 
                             }
                         }
                         // nearly one third of survived cells mutated in one command(gene)
-                        for(int i=20;i<cellLife.size();i++){
-                            cellLife.get(i).getCellLifeCommand()[(int)((Math.random())*63)]=(int)((Math.random())*63);
+                        for(int i=16;i<cellLife.size();i++){
+                            cellLife.get(i).getCellLifeCommand()[(int)((Math.random())*63)]=(int)((Math.random())*commandRange);
                             //System.out.println(" index "+((int)((Math.random())*63))+"/ mutation: "+(int)((Math.random())*63));
-                            cellLife.get(i).setCellMutation(""+generation);
+                            cellLife.get(i).setCellMutation(cellLife.get(i).getCellMutation()+"/"+generation);
                         }
                     }
 
@@ -135,9 +143,11 @@ public class GameOfLife extends Application {
 
                 }
 
+
                 if(generation==maxGeneration) {
                     stop();
                 }
+                System.out.print(".");
 
             }
         };
@@ -158,7 +168,7 @@ public class GameOfLife extends Application {
     private void addCellLife(GameObject cell, double x, double y){
         int[] cellCommand=new int[64];
         for(int i=0;i<64;i++){
-            cellCommand[i]=((int)(Math.random()*63))%63;
+            cellCommand[i]=((int)(Math.random()*commandRange));
         }
         cell.setCellLifeCommand(cellCommand);
         cellLife.add(cell);
@@ -199,6 +209,8 @@ public class GameOfLife extends Application {
                 }
             }else if(command<16){
                 cellLife.get(i).makeStep(command,screenSizeX,screenSizeY);
+                //uses energy to move
+                cellLife.get(i).setLifeTime(cellLife.get(i).getLifeTime()-1);
                 //cell dies if it steps ont poison
                 for(int j=0;j<poisons.size();j++){
                     if((cellLife.get(i).getView().getTranslateX()+cellLife.get(i).getDirectionX()*10==poisons.get(j).getView().getTranslateX())&&(cellLife.get(i).getView().getTranslateY()+cellLife.get(i).getDirectionY()*10==poisons.get(j).getView().getTranslateY())) {
