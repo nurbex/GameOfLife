@@ -7,9 +7,13 @@ public class GameObject {
     private boolean isAlive=true;
 
     private int lifeTime=90;
+    private int maxLifeTime=lifeTime;
     private int generation;
     private String cellName="N";
     private String cellMutation="M";
+
+    private double rememberX=-11;
+    private double rememberY=-11;
 
     private int commandIndex=0;
     private int[] cellLifeCommand=new int[64];
@@ -36,6 +40,13 @@ public class GameObject {
     }
     public void setLifeTime(int lifeTime){
         this.lifeTime=lifeTime;
+        if(lifeTime>maxLifeTime){
+            maxLifeTime=lifeTime;
+        }
+    }
+
+    public int getMaxLifeTime(){
+        return maxLifeTime;
     }
 
     public int getGeneration(){
@@ -57,6 +68,22 @@ public class GameObject {
     }
     public void setCellMutation(String n){
         this.cellMutation=n;
+    }
+
+    public void setRememberX(double rememberX) {
+        this.rememberX = rememberX;
+    }
+
+    public void setRememberY(double rememberY) {
+        this.rememberY = rememberY;
+    }
+
+    public double getRememberX() {
+        return rememberX;
+    }
+
+    public double getRememberY() {
+        return rememberY;
     }
 
     public void setDirectionX(int x){
