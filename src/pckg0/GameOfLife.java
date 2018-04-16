@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameOfLife extends Application {
-    private int screenSizeX=300;
+    private int screenSizeX=400;
     private int screenSizeY=screenSizeX;
 
     private int skipTime=1;
@@ -58,9 +58,7 @@ public class GameOfLife extends Application {
         int[] nurbeksCommands={7, 13, 0, 5, 1, 2, 2, 2, 6, 9, 10, 12, 11, 2, 0, 5, 8, 9, 6, 1, 8, 10, 9, 6, 12, 1, 3, 1, 2, 13, 0, 5, 1, 3, 6, 10, 14, 8, 10, 3, 3, 6, 11, 6, 2, 4, 8, 10, 10, 5, 4, 14, 11, 4, 7, 3, 8, 0, 1, 9, 10, 9, 1, 12};
         cellLife.get(0).setCellLifeCommand(nurbeksCommands);
         //System.out.println(cellLife.get(0).getCellName());
-        for(int i=0;i<64;i++){
-           // System.out.print(cellLife.get(0).getCellLifeCommand()[i]+" ");
-        }
+
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -110,20 +108,22 @@ public class GameOfLife extends Application {
 
                         //creating copies of survived cells
                         int k=cellLife.size();
+                        int xzy=0;
                         while(cellLife.size()<=32){
-                            for(int i=0;i<k;i++){
-                                int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 10) * 10;
-                                int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 10) * 10;
-                                addCellLife(new CellLife(), x, y);
-                                for(int j=0;j<64;j++) {
-                                    cellLife.get(i + k).getCellLifeCommand()[j] = cellLife.get(i).getCellLifeCommand()[j];
-                                }
-                                cellLife.get(cellLife.size()-1).setCellMutation(cellLife.get(i).getCellMutation());
-                                cellLife.get(cellLife.size()-1).setGeneration(cellLife.get(i).getGeneration());
-                                cellLife.get(cellLife.size()-1).setCellName("/"+i);
 
+                            int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 10) * 10;
+                            int y = ((int) (Math.random() * gameArea.getPrefHeight()) / 10) * 10;
+                            addCellLife(new CellLife(), x, y);
+                            for(int j=0;j<64;j++) {
+                                cellLife.get(cellLife.size()-1).getCellLifeCommand()[j] = cellLife.get(xzy).getCellLifeCommand()[j];
                             }
+                            cellLife.get(cellLife.size()-1).setCellMutation(cellLife.get(xzy).getCellMutation());
+                            cellLife.get(cellLife.size()-1).setGeneration(cellLife.get(xzy).getGeneration());
+                            cellLife.get(cellLife.size()-1).setCellName("/"+xzy);
+                            xzy++;
+                            if(xzy==k){xzy=0;}
                         }
+
                         // nearly one third of survived cells mutated in one command(gene)
                         for(int i=16;i<cellLife.size();i++){
                             cellLife.get(i).getCellLifeCommand()[(int)((Math.random())*63)]=(int)((Math.random())*commandRange);
@@ -132,6 +132,15 @@ public class GameOfLife extends Application {
                         }
                     }
 
+                    /*
+                    //printing created celllife command genes
+                    for(int j=0;j<cellLife.size();j++){
+                        for(int i=0;i<64;i++){
+                            System.out.print(cellLife.get(j).getCellLifeCommand()[i]+" ");
+                        }
+                        System.out.println();
+                    }*/
+                    System.out.println();
                     //creating random population of cells
                     /*while(cellLife.size()!=cellPopulation){
                         int x = ((int) (Math.random() * gameArea.getPrefWidth()) / 10) * 10;
@@ -148,7 +157,7 @@ public class GameOfLife extends Application {
                 if(generation==maxGeneration) {
                     stop();
                 }
-                System.out.print(".");
+                //System.out.print(".");
 
             }
         };
