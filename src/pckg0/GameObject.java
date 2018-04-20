@@ -231,5 +231,4 @@ public class GameObject {
         return getView().getBoundsInParent().intersects(other.getView().getBoundsInParent());
     }
 
-
 }

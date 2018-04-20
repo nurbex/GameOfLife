@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameOfLife extends Application {
-    private int screenSizeX=400;
+    private int screenSizeX=300;
     private int screenSizeY=screenSizeX;
 
     private int skipTime=1;
@@ -24,7 +24,7 @@ public class GameOfLife extends Application {
     private int cellLifeTime=1000000;
     private int cellPopulation=40;
     private int commandRange=15; //default 63
-    private double foodChance=5.5;
+    private double foodChance=55.5;
     private double foodChanceCycle =foodChance;
     private int foodTimes=20;
     private int foodCycle=foodTimes;
@@ -55,7 +55,7 @@ public class GameOfLife extends Application {
                 cellLife.get(cellLife.size()-1).setCellName(""+generation+"/"+cellLife.indexOf(cellLife.get(cellLife.size()-1)));
         }
         cellLife.get(0).setCellName("Nurbek");
-        int[] nurbeksCommands={7, 13, 0, 5, 1, 2, 2, 2, 6, 9, 10, 12, 11, 2, 0, 5, 8, 9, 6, 1, 8, 10, 9, 6, 12, 1, 3, 1, 2, 13, 0, 5, 1, 3, 6, 10, 14, 8, 10, 3, 3, 6, 11, 6, 2, 4, 8, 10, 10, 5, 4, 14, 11, 4, 7, 3, 8, 0, 1, 9, 10, 9, 1, 12};
+        int[] nurbeksCommands={0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 2, 10};
         cellLife.get(0).setCellLifeCommand(nurbeksCommands);
         //System.out.println(cellLife.get(0).getCellName());
 
@@ -99,9 +99,9 @@ public class GameOfLife extends Application {
                         for(int i=0;i<cellLife.size();i++){
                             //System.out.print("Survived cell generation: "+cellLife.get(i).getGeneration()+". CellName: "+cellLife.get(i).getCellName()+". CellMutation: "+cellLife.get(i).getCellMutation()+ ". Cell Command Genes: ");
 
-                            System.out.print("maxLifeTime: "+cellLife.get(i).getMaxLifeTime()+" cell CommandGenes: ");
+                            System.out.print("maxLifeTime: "+cellLife.get(i).getMaxLifeTime()+" Commands: ");
                             for(int k=0;k<64;k++){
-                                System.out.print(cellLife.get(i).getCellLifeCommand()[k]+" ");
+                                System.out.print(cellLife.get(i).getCellLifeCommand()[k]+",");
                             }
                             System.out.println();
                         }
